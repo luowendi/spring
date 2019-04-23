@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>注册功能</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content=" HIT Conundrum PKing System">
+    <meta name="description" content=" HIT Conundrum PKing System">
+    <link rel="shortcut icon" href="../static/signup_resources/images/favicon.ico" />
+    <link href="signup_resources/style/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="signup_resources/js/jquery.js"></script>
+    <script type="text/javascript" src="signup_resources/js/jquery.i18n.properties-1.0.9.js" ></script>
+    <script type="text/javascript" src="signup_resources/js/jquery-ui-1.10.3.custom.js"></script>
+    <script type="text/javascript" src="signup_resources/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="signup_resources/js/md5.js"></script>
+    <script type="text/javascript" src="signup_resources/js/page_regist.js?lang=zh"></script>
+    <!--[if IE]>
+    <script src="signup_resources/js/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+    <script src="signup_resources/js/DD_belatedPNG_0.0.8a-min.js" language="javascript"></script>
+    <script>
+        DD_belatedPNG.fix('div,li,a,h3,span,img,.png_bg,ul,input,dd,dt');
+    </script>
+    <![endif]-->
+
+    <script src="../res/js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript"></script>
+
+    <script>
+        function login() {
+
+            var con_id = document.getElementById("con_id").value;
+            var con_department = document.getElementById("con_department").value;
+            var con_course = document.getElementById("con_course").value;
+            var con_score = document.getElementById("con_score").value;
+            var con_content = document.getElementById("con_content").value;
+
+            var stu_id="1163710104";
+
+            var url = "http://localhost:8081/publish/publishConundrum?con_id=" +con_id
+                + "&con_department="+con_department
+                + "&con_course="+con_course
+                + "&con_score="+con_score
+                + "&con_content="+con_content
+                +"&stu_id="+stu_id;
+
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                type:"get",
+                dataType: 'json',
+                success: function (data) {
+                    var obj=data;
+                    if(obj!=null){
+                    alert("亲 您的难题发布成功啦！等老师来回答吧！");
+                    window.location.href="Stu_homepage.html";
+                    }
+
+                },
+                error: function (data) {
+
+                    alert("亲 您的难题发布失败！有小鬼偷了你的数据包！");
+                    window.location.href="error.html";
+                    alert(data);
+                }
+            });
+        }
+
+        function test() {
+            alert("测试成功！")
+        }
+    </script>
+
+</head>
+<body class="loginbody">
+<div class="dataEye">
+    <div class="loginbox registbox">
+        <div class="logo-a">
+            <img src="signup_resources/images/logo-a.png" height="150" alt="">
+        </div>
+        <div class="login-content reg-content">
+            <div class="loginbox-title">
+                <h3>BUGS</h3>
+            </div>
+            <form id="signupForm">
+                <div class="login-error"></div>
+                <div class="row">
+                    <input type="text" value="" class="input-text-user noPic input-click" name="con_id" id="con_id"
+                           placeholder="题目编号">
+                </div>
+                <div class="row">
+                    <input type="text" value="" class="input-text-user noPic input-click" name="con_department" id="con_department"
+                           placeholder="题目院系">
+                </div>
+                <div class="row">
+                    <input type="text" value="" class="input-text-user noPic input-click" name="con_course" id="con_course"
+                           placeholder="所属课程">
+                </div>
+                <div class="row">
+                    <input type="text" value="" class="input-text-user noPic input-click" name="con_score" id="con_score"
+                           placeholder="题目分值">
+                </div>
+                <div class="row">
+                    <input type="text" value="" class="input-text-user noPic input-click" name="con_content" id="con_content"
+                           placeholder="难题描述">
+                </div>
+
+                <div class="row">
+                    &nbsp;&nbsp; &nbsp;<input type="button" class="input-text-user noPic input-click" value="发布新题" onclick="login()">
+                </div>
+
+                <!--<div class="row tips">-->
+                    <!--<input type="checkbox" id="checkBox">-->
+                    <!--<label>-->
+                        <!--我已阅读并同意-->
+                        <!--<a href="#" target="_blank">隐私政策、服务条款</a>-->
+                    <!--</label>-->
+                <!--</div>-->
+
+                <div class="row btnArea">
+                    <!--<a class="login-btn" id="submit">注册</a>-->
+
+                </div>
+            </form>
+        </div>
+        <!--<div class="go-regist">-->
+            <!--已有帐号,请<a href="#" class="link">登录</a>-->
+        <!--</div>-->
+    </div>
+
+    <div id="footer"><p> HIT Conundrum PKing System</p></div>
+</div>
+<div class="loading">
+    <div class="mask">
+        <div class="loading-img">
+            <img src="signup_resources/images/loading.gif" width="31" height="31">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

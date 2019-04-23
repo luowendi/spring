@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+        <html lang="en" xmlns:th="http://www.thymeleaf.org">
+        <head>
+            <meta charset="UTF-8"/>
+            <title>添加</title>
+            <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+
+            <script type="text/javascript">
+
+                //获取指定form中的所有的<input>对象
+                function getElements(formId) {
+                    var form = document.getElementById(formId);
+                    var elements = new Array();
+                    var tagElements = form.getElementsByTagName('input');
+                    for (var j = 0; j < tagElements.length; j++){
+                        elements.push(tagElements[j]);
+
+                    }
+                    return elements;
+                }
+
+                //获取单个input中的【name,value】数组
+                function inputSelector(element) {
+                    if (element.checked)
+                        return [element.name, element.value];
+                }
+
+                function input(element) {
+                    switch (element.type.toLowerCase()) {
+                        case 'submit':
+                        case 'hidden':
+                        case 'password':
+                        case 'text':
+                            return [element.name, element.value];
+                        case 'checkbox':
+                        case 'radio':
+                            return inputSelector(element);
+                    }
+                    return false;
+                }
+
+                //组合URL
+                function serializeElement(element) {
+                    var method = element.tagName.toLowerCase();
+                    var parameter = input(element);
+
+                    if (parameter) {
+                        var key = encodeURIComponent(parameter[0]);
+                        if (key.length == 0) return;
+
+                        if (parameter[1].constructor != Array)
+                            parameter[1] = [parameter[1]];
+
+                        var values = parameter[1];
+                        var results = [];
+                        for (var i=0; i<values.length; i++) {
+                            results.push(key + '=' + encodeURIComponent(values[i]));
+                        }
+                        return results.join('&');
+                    }
+                }
+
+                //调用方法
+                function serializeForm(formId) {
+                    var elements = getElements(formId);
+                    var queryComponents = new Array();
+
+                    for (var i = 0; i < elements.length; i++) {
+                        var queryComponent = serializeElement(elements[i]);
+                        if (queryComponent)
+                            queryComponents.push(queryComponent);
+                    }
+
+                    return queryComponents;
+                }
+
+                function login() {
+                    var params = serialilizeForm('myform');
+                    var username = params[0].split("=")[1];
+                    var  password= params[1].split("=")[1];
+                    var  phone = params[2].split("=")[1];
+                    var  sex = params[3].split("=")[1];
+                    $.ajax({
+                        //几个参数需要注意一下
+                        type: "POST",//方法类型
+                        dataType: "json",//预期服务器返回的数据类型
+                        url: "http://localhost:8081/secondhourses/user/insertUser/?username="+username+"?password="+password+"?phone="+phone+"?sex="+sex,
+                        data: $('myform').serialize(),
+                        success: function (result) {
+                            console.log(result);//打印服务端返回的数据(调试用)
+                            if (result.resultCode == 200) {
+                                alert("SUCCESS");
+                            }
+                            ;
+                        },
+                        error : function() {
+                            alert("异常！");
+                        }
+                    });
+                }
+            </script>
+            <script src="../static/js/jquery-1.8.3.js"></script>
+        </head>
+<body class="container">
+<br/>
+<h1>添加二手房信息</h1>
+<br/><br/>
+<div class="with:80%">
+    <form id="myform" class="form-horizontal"  action="##"  method="post">
+        <div class="form-group">
+            <label for="address" class="col-sm-2 control-label">Address</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="address"  id="address" placeholder="address"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="produce" class="col-sm-2 control-label" >Produce</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="produce" id="produce" placeholder="produce"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price" class="col-sm-2 control-label">Price</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="price"  id="price" placeholder="price"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="userid" class="col-sm-2 control-label">Userid</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="userid"  id="userid" placeholder="userid"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="提交" class="btn btn-info" />
+                &nbsp; &nbsp; &nbsp;
+                <input type="reset" value="重置" class="btn btn-info" />
+            </div>
+
+        </div>
+    </form>
+</div>
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>

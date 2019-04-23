@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>user</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+</head>
+<body>
+
+<div style="text-align: center;margin:0 auto;width: 1000px; ">
+    <h1>二手房服务总界面</h1>
+
+    <table width="100%" border="1" cellspacing="1" cellpadding="0">
+        <tr>
+            <td>二手房服务列表</td>
+        </tr>
+        <tr>
+            <td><a href="" th:href="@{/house/list}" class="btn btn-info">房源管理</a></td>
+        </tr>
+        <tr>
+            <td><a href="/more/notice" th:href="@{more/toShow}" class="btn btn-info">消息通知</a></td>
+        </tr>
+        <tr>
+            <td><a href="/list" th:href="@{/list}" class="btn btn-info">评价服务</a></td>
+        </tr>
+        <tr>
+            <td><a href="/user/toAdd" th:href="@{/user/list}" class="btn btn-info">用户中心</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

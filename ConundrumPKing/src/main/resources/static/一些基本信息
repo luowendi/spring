@@ -1,0 +1,16 @@
+1 难题的ID
+    年+月+日  例如   20160912
+2 院系
+    ComputerScience
+    Manage
+3 课程
+    Database
+    Economy
+4 时间
+    一律是字符串的形式
+    new SimpleDateFormat().format(new Date())).toString()
+5 学生信息表
+     学号不能修改！只能修改其他信息
+     删除的话！级连删除！删除所有信息记录！（谨慎使用）
+6 rank表基本没怎么用！很鸡肋
+7

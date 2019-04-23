@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home page</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/jquery-1.8.3.js"></script>
+
+    <script type="text/javascript">
+
+        window.onload = function(){
+
+            var login_user = JSON.parse(sessionStorage.getItem('login_user'));
+            if(login_user ==null){
+                alert("您未登陆！即将返回登陆界面");
+               window.location.href="homepage.html";
+            }else{
+                $("#ad").append('<button id="publish">发布题目</button><br>\n' +
+                    '<button id="deleteTeaccount" >删除个人信息</button><br>'+
+                    '<button id="modify_information" >修改个人信息</button><br>'+
+                    '<button id="showranks" >查看排行榜</button><br>');
+            }
+            var url = 'http://localhost:8081/home/showAll';
+
+            $.ajax({
+                url:url,
+                type:'get',
+                dataType:'json',   //回掉类型
+                success:function(data) {
+                    console.log(data)
+                    var obj = data;
+                    if(obj!=null){
+                        $(obj).each(function (index) {
+                            var val = obj[index];
+                            if(val!=null){
+
+                                $("#a").append('<tr>'
+                                    + '<td>'+val.con_id+'</td>' +
+                                    '<td>' +val.con_department+'</td>' +
+                                    '<td>' +val.con_course+'</td>' +
+                                    '<td>' +val.con_score+'</td>' +
+                                    '<td>' +val.con_content+'</td>'+
+                                    '<td>'+val.con_date+'</td>'
+                                    +'<td id="'+index+'"></tr>');
+
+                                var button = document.createElement("input");
+                                button.type="button";
+                                button.value = "解答";
+                                button.onclick = function () {
+                                    as(val)
+                                }
+                                document.getElementById(index).appendChild(button);
+                            }
+                        })
+                    }
+                },
+                error: function(data) {
+                    alert("数据传输失败");
+                }
+            });
+
+            $("#stusignin").click(function (){
+
+                window.location.href = "stu_signin.html";
+            });
+
+            $("#stusignup").click(function () {
+                window.location.href = "student_signup.html";
+            });
+
+            $("#deleteTeaccount").click(function () {
+                console.log(login_user);
+                /////
+                var in_id=login_user.username;
+                console.log(in_id);
+
+                var thisurl="http://localhost:8081/modify/deleteInstructor?in_id="+in_id;
+                $.ajax({
+                    url:thisurl,
+                    type:'get',
+                    dataType:'json',   //回掉类型
+                    success:function(data) {
+                        alert("您的所有个人信息已经被删除！");
+                        window.location.href="homepage.html";
+                    },
+                    error: function(data) {
+                        alert("数据传输失败");
+                    }
+                });
+                ////
+            });
+
+            //修改个人信息界面
+            $("#modify_information").click(function () {
+                window.location.href = "TeaModify.html";
+            });
+
+            $("#teasignin").click(function (){
+                var identity="teacher";
+                sessionStorage.setItem("personality",JSON.stringify(identity));
+                window.location.href = "tea_signin.html";
+            });
+
+            $("#teasignup").click(function () {
+
+                window.location.href = "teacher_signup.html";
+            });
+
+            $("#publish").click(function () {
+                window.location.href="publishConundrum.html";
+            });
+
+            $("#showranks").click(function () {
+                window.location.href="Instructor_rank.html";
+            });
+
+            function as(val) {
+                sessionStorage.setItem("answerquestion",JSON.stringify(val));
+                window.location.href = "answerConundrum.html"
+            }
+
+        }
+
+    </script>
+</head>
+<body class="housecontainer">
+<br/>
+<h1>客官来看看！</h1>
+<br/><br/>
+<div class="with:80%">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>难题ID</th>
+            <th>难题所属院系</th>
+            <th>难题科目</th>
+            <th>难题分值</th>
+            <th>难题描述</th>
+            <th>发布日期</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="a">
+        </tbody>
+    </table>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 control-label" id="ad_student">
+    </div>
+
+    <div class="col-sm-2 control-label" id="ad_teacher">
+    </div>
+
+    <div class="col-sm-2 control-label" id="ad">
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.InstructorloggMapper">
+
+    <!--<select id="getallAppraiseMapper" resultType="appraise">-->
+        <!--select * from appraise-->
+    <!--</select>-->
+    <!--老师答完题目后分数应该会增加-->
+
+
+    <select id="teacherLog"  resultType="instructor_account" parameterType="java.lang.String">
+        select * from instructor_account where username= #{arg0}
+    </select>
+
+
+    <!--<select id="findAppraise" resultType="appraise" parameterType="java.lang.Integer">-->
+        <!--select * from appraise where a_hourseid=#{arg0}-->
+    <!--</select>-->
+
+    <insert id="instructorSignup" parameterType="instructor_account">
+        insert into instructor_account (username,password) values (#{username},#{password})
+    </insert>
+</mapper>

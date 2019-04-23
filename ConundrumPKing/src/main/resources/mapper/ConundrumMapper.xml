@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.ConundrumMapper">
+
+
+    <select id="getAllconundrum" resultType="conundrum">
+        select * from conundrum
+    </select>
+
+
+    <insert id="addConundrum" parameterType="conundrum">
+        insert into conundrum (con_id,con_department,con_course,con_score,con_content,con_date)
+        values (#{con_id},#{con_department},#{con_course},#{con_score},#{con_content},#{con_date})
+    </insert>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.InstructorMapper">
+
+    <!--<select id="getallAppraiseMapper" resultType="appraise">-->
+        <!--select * from appraise-->
+    <!--</select>-->
+    <!--老师答完题目后分数应该会增加-->
+    <update id="addScore" parameterType="instructor">
+        update instructor set in_name=#{in_name},in_score=#{in_score},
+          in_department=#{in_department},in_course=#{in_course} where in_id=#{in_id}
+    </update>
+
+    <!--老师修改信息后，分数会归零-->
+    <update id="modifyInstructorByid" parameterType="instructor">
+      update instructor set in_name=#{in_name},in_score=#{in_score},
+     in_department=#{in_department},in_course=#{in_course} where in_id=#{in_id}
+    </update>
+
+    <select id="getInstructorById" resultType="instructor" parameterType="java.lang.String">
+        select * from instructor where in_id= #{arg0}
+    </select>
+
+    <select id="getAllRank" resultType="instructor">
+        select * from instructor order by in_score desc
+    </select>
+
+
+    <delete id="deleteInstructorByid" parameterType="java.lang.String">
+        delete from instructor where  in_id=#{arg0}
+    </delete>
+
+    <!--<select id="findAppraise" resultType="appraise" parameterType="java.lang.Integer">-->
+        <!--select * from appraise where a_hourseid=#{arg0}-->
+    <!--</select>-->
+
+    <!--<insert id="addAppraise" parameterType="appraise">-->
+        <!--insert into appraise (a_hourseappraise,a_userid,a_hourseid,a_data) values (#{a_hourseappraise},#{a_userid},#{a_hourseid},#{a_data})-->
+    <!--</insert>-->
+</mapper>

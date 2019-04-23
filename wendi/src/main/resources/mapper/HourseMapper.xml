@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="luo.demo.dao.HourseMapper">
+    <select id="getallhourses" resultType="luo.demo.pojo.hourse">
+        select * from hourse
+    </select>
+    <update id="updatehourse" parameterType="hourse">
+        update hourse set h_address=#{h_address} , h_produce=#{h_produce} ,h_price=#{h_price},h_userid=#{h_userid} where h_id=#{h_id}
+    </update>
+    
+    <delete id="deleteHourse" parameterType="java.lang.Integer">
+        delete from hourse where h_id=#{arg0}
+    </delete>
+    
+    <insert id="insertHourse" parameterType="hourse">
+        insert into hourse (h_address,h_produce,h_price,h_userid) values (#{h_address},#{h_produce},#{h_price},#{h_userid})
+    </insert>
+</mapper>

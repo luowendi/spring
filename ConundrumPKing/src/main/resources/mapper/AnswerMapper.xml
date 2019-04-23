@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.AnswerMapper">
+
+    <insert id="resolveProblem" parameterType="answer">
+       insert into answer (in_id,con_id,an_date,an_content)
+       values (#{in_id},#{con_id},#{an_date},#{an_content})
+    </insert>
+
+    <select id="getAnswerById" parameterType="java.lang.String" resultType="answer">
+
+        select * from answer where con_id=#{arg0}
+    </select>
+</mapper>

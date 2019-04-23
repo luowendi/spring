@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>注册功能</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content=" HIT Conundrum PKing System">
+    <meta name="description" content=" HIT Conundrum PKing System">
+    <link rel="shortcut icon" href="../static/signup_resources/images/favicon.ico" />
+    <link href="signup_resources/style/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="signup_resources/js/jquery.js"></script>
+    <script type="text/javascript" src="signup_resources/js/jquery.i18n.properties-1.0.9.js" ></script>
+    <script type="text/javascript" src="signup_resources/js/jquery-ui-1.10.3.custom.js"></script>
+    <script type="text/javascript" src="signup_resources/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="signup_resources/js/md5.js"></script>
+    <script type="text/javascript" src="signup_resources/js/page_regist.js?lang=zh"></script>
+    <!--[if IE]>
+    <script src="../static/signup_resources/js/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+    <script src="signup_resources/js/DD_belatedPNG_0.0.8a-min.js" language="javascript"></script>
+    <script>
+        DD_belatedPNG.fix('div,li,a,h3,span,img,.png_bg,ul,input,dd,dt');
+    </script>
+    <![endif]-->
+
+    <script src="../res/js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript"></script>
+
+    <script>
+        function stusignup() {
+
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var identity="student";
+
+
+            var url = "http://localhost:8081/signup/PeopleSignup?username=" +username
+                + "&password="+password
+                + "&identity="+identity;
+
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                type:"get",
+                dataType: 'json',   //回掉类型
+                success: function (data) {
+                    alert("你已经注册完成了！快登陆吧！");
+                    var person="student";
+                    sessionStorage.setItem("personality",JSON.stringify(person));
+                    window.location.href = "signin.html";
+                    // console.log("下面打印的是登陆返回的对应用户")
+                    // console.log(data);
+                    // if (data != null) {
+                    //     sessionStorage.setItem("login_user", JSON.stringify(data));
+                    //     window.location.href = "homepage.html";
+                    // }
+                    // else {
+                    //     alert("用户名或者密码错误");
+                    // }
+                },
+                error: function (data) {
+                    alert("亲！你的数据包被小猫吃了！注册失败了！");
+                }
+            });
+        }
+
+        function test() {
+            alert("测试成功！")
+        }
+    </script>
+</head>
+<body class="loginbody">
+<div class="dataEye">
+    <div class="loginbox registbox">
+        <div class="logo-a">
+                <img src="signup_resources/images/logo-a.png" height="150" alt="">
+        </div>
+        <div class="login-content reg-content">
+            <div class="loginbox-title">
+                <h3>学生注册</h3>
+            </div>
+            <form id="signupForm">
+                <div class="login-error"></div>
+                <div class="row">
+                    <input type="text" value="" class="input-text-user noPic input-click" name="username" id="username"
+                           placeholder="学号">
+                </div>
+                <div class="row">
+                    <input type="password" value="" class="input-text-password noPic input-click" name="password" id="password"
+                           placeholder="密码">
+                </div>
+                <!--<div class="row">-->
+                    <!--&nbsp;&nbsp; &nbsp;<input type="button" class="input-text-user noPic input-click" value="学生注册" onclick="stusignup()">-->
+                <!--</div>-->
+                <!--<div class="row tips">-->
+                    <!--<input type="checkbox" id="checkBox">-->
+                    <!--<label>-->
+                        <!--我已阅读并同意-->
+                        <!--<a href="#" target="_blank">隐私政策、服务条款</a>-->
+                    <!--</label>-->
+                <!--</div>-->
+
+                <div class="row btnArea">
+                    <a class="login-btn" id="submit" onclick="stusignup()">注册</a>
+                </div>
+            </form>
+        </div>
+        <div class="go-regist">
+            已有帐号,请<a href="#" class="link">登录</a>
+        </div>
+    </div>
+
+    <div id="footer"><p> HIT Conundrum PKing System</p></div>
+</div>
+<div class="loading">
+    <div class="mask">
+        <div class="loading-img">
+            <img src="signup_resources/images/loading.gif" width="31" height="31">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

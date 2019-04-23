@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>通知列表</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <!--<script src="../static/js/jquery-1.8.3.js"></script>-->
+    <!--<script type="text/javascript">-->
+    <!--$(function() {-->
+    <!--$("#btnOK").click(function() {-->
+    <!--window.location.href="houseAdd.html";-->
+    <!--});-->
+    <!--});-->
+    <!--$(function() {-->
+    <!--$("modify").click(function() {-->
+    <!--window.location.href="houseAdd.html";-->
+    <!--});-->
+    <!--});-->
+
+    <!--</script>-->
+</head>
+<body class="housecontainer">
+<br/>
+<h1>通知列表</h1>
+<br/><br/>
+<div class="with:80%">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>通知ID</th>
+            <th>发送着ID</th>
+            <th>内容</th>
+            <th>接受者ID</th>
+            <th>日期</th>
+            <th>是否私有</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="sendermessage" type="message"*/-->
+        <tr th:each="sender : ${sendermessage}">
+            <td th:text="${sender.m_id}">1</td>
+            <td th:text="${sender.m_senderid}">2</td>
+            <td th:text="${sender.m_content}">good</td>
+            <td th:text="${sender.m_reciecerid}">1</td>
+            <td th:text="${sender.m_data}">2028-12-1</td>
+            <td th:text="${sender.m_isprivate}">1</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--<div class="with:80%">-->
+<!--<table class="table table-hover">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th>通知ID</th>-->
+<!--<th>发送着ID</th>-->
+<!--<th>内容</th>-->
+<!--<th>接受者ID</th>-->
+<!--<th>日期</th>-->
+<!--<th>是否私有</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--&lt;!&ndash;/*@thymesVar id="receivermessage" type="message"*/&ndash;&gt;-->
+<!--<tr th:each="receiver : ${receivermessage}">-->
+<!--<td th:text="${receiver.m_id}">1</td>-->
+<!--<td th:text="${receiver.m_senderid}">2</td>-->
+<!--<td th:text="${receiver.m_content}">good</td>-->
+<!--<td th:text="${receiver.m_reciecerid}">1</td>-->
+<!--<td th:text="${receiver.m_data}">2028-12-1</td>-->
+<!--<td th:text="${receiver.m_isprivate}">1</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+</body>
+</html>
